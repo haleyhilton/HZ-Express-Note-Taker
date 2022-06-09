@@ -11,9 +11,7 @@ const htmlRoutes = require('./routes/htmlRoutes')
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(express.static('public'));
-// app.get('/api/notes', (req, res) => {
-//     res.json(allNotes.slice(1));
-// });
+
 
 app.use('/', htmlRoutes)
 
@@ -28,11 +26,6 @@ console.log(path.join(__dirname, './public/notes.html'))
 
 
   
-  // app.get('/api/notes', (req, res) => {
-  // return res.json(fs.readFile('db/db.json', 'utf-8').then(saveNotes => {
-  //  return JSON.parse(saveNotes)
-  //  }))
-  //   });
 //  router.get('/', (req, res) =>
 //    res.sendFile(path.join(__dirname, './public/index.html'))
 //   );
