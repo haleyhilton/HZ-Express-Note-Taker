@@ -6,6 +6,7 @@ const PORT = process.env.PORT || 3001;
 const app = express();
 
 const htmlRoutes = require('./routes/htmlRoutes')
+//const apiRoutes = require('./routes/apiRoutes')(app)
 
 
 app.use(express.json());
@@ -15,6 +16,7 @@ app.use(express.static('public'));
 
 app.use('/', htmlRoutes)
 
+
 //POST /api/notes add to db.json
 // app.post('/api/notes', (req, res) => {
 //     dataStuff.push(req.body)
@@ -22,10 +24,8 @@ app.use('/', htmlRoutes)
 
 // });
 
-console.log(path.join(__dirname, './public/notes.html'))
+//console.log(path.join(__dirname, './public/notes.html'))
 
-
-  
 //  router.get('/', (req, res) =>
 //    res.sendFile(path.join(__dirname, './public/index.html'))
 //   );
