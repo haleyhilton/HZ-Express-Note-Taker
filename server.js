@@ -1,44 +1,47 @@
-const PORT = process.env.PORT || 3001;
+const express = require('express');
 const fs = require('fs');
 const path = require ('path');
-
-const express = require('express');
+const dataStuff = require('./db/db.json')
+const PORT = process.env.PORT || 3001;
 const app = express();
 
+const htmlRoutes = require('./routes/htmlRoutes')
+
+
 app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
-app.use('/api', api);
-
+app.use(express.urlencoded({ extended: false }));
 app.use(express.static('public'));
+// app.get('/api/notes', (req, res) => {
+//     res.json(allNotes.slice(1));
+// });
 
-//GET /notes >> notes.html
-app.get('/notes', (req, res) => 
-  res.sendFile(path.join(__dirname, '/public/notes.html'))
-);
+app.use('/', htmlRoutes)
 
-app.get('/', (req, res) =>
-  res.sendFile(path.join(__dirname, '/public/index.html'))
-);
-//GET * >> index.html (in lieu of 404 route)
-app.get('*', (req, res) =>
-  res.sendFile(path.join(__dirname, '/public/index.html'))
-);
-
-
-//GET /api/notes read db.json
 //POST /api/notes add to db.json
-app.post('/api/notes', (req, res) => {
-    const newNote = createNote(req.body, allNotes);
-    res.json(newNote);
-});
-// GET Route for index.html
+// app.post('/api/notes', (req, res) => {
+//     dataStuff.push(req.body)
+//     res.json(dataStuff)
+
+// });
+
+console.log(path.join(__dirname, './public/notes.html'))
 
 
+  
+  // app.get('/api/notes', (req, res) => {
+  // return res.json(fs.readFile('db/db.json', 'utf-8').then(saveNotes => {
+  //  return JSON.parse(saveNotes)
+  //  }))
+  //   });
+//  router.get('/', (req, res) =>
+//    res.sendFile(path.join(__dirname, './public/index.html'))
+//   );
+  
+  
 
-function createNote() {
-    const newNote = body;
-}
-
+// app.get('*', (req, res) =>
+//   res.sendFile(path.join(__dirname, './public/index.html'))
+// );
 
 app.listen(PORT, () =>
   console.log(`App listening at http://localhost:${PORT} 🚀`)
