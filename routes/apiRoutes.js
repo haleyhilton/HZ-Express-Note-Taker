@@ -7,9 +7,7 @@ const { v4: uuidv4 } = require('uuid');
     // API GET Request
     router.get("/api/notes", (req, res) => {
         
-        let data = JSON.parse(fs.readFileSync("./db/db.json", "utf8"));
-        console.log("\nGET request - Returning notes data: " + JSON.stringify(data));
-        
+        let data = JSON.parse(fs.readFileSync("./db/db.json", "utf8"));        
         res.json(data);
     });
 
@@ -24,7 +22,7 @@ const { v4: uuidv4 } = require('uuid');
          data.push(newNote);
 
         fs.writeFileSync('./db/db.json', JSON.stringify(data));
-        console.log("\nSuccessfully added new note to 'db.json' file!");
+        console.log("\nSuccessfully added new note");
 
         res.json(data);
     });
