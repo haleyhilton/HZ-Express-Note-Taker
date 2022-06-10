@@ -1,34 +1,29 @@
 const fs = require("fs");
+const router = require('express').Router();
 
-// ROUTING
-module.exports = function (app) {
+
 
     // API GET Request
-    app.get("/api/notes", (request, response) => {
+    router.get("/api/notes", (req, res) => {
         
         // Read 'db.json' file 
         let data = JSON.parse(fs.readFileSync("./db/db.json", "utf8"));
-        
         console.log("\nGET request - Returning notes data: " + JSON.stringify(data));
         
         // Send read data to response of 'GET' request
-        response.json(data);
+        res.json(data);
     });
 
 
     // API POST Request
-    app.post("/api/notes", (request, response) => {
+    router.post("/api/notes", (req, res) => {
 
-        // Extracted new note from request body.  
-        const newNote = request.body;
-        
+        const newNote = req.body;
         console.log("\n\nPOST request - New Note : " + JSON.stringify(newNote));
 
         // Read data from 'db.json' file
         let data = JSON.parse(fs.readFileSync("./db/db.json", "utf8"));
-    
-        // Pushed new note in notes file 'db.json'
-        data.push(newNote);
+         data.push(newNote);
 
         // Written notes data to 'db.json' file
         fs.writeFileSync('./db/db.json', JSON.stringify(data));
@@ -36,6 +31,7 @@ module.exports = function (app) {
         console.log("\nSuccessfully added new note to 'db.json' file!");
 
         // Send response
-        response.json(data);
+        res.json(data);
     });
-};
+
+    module.exports = router;
